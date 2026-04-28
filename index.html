@@ -14,16 +14,19 @@
       theme: {
         extend: {
           colors: {
-            bg: '#090A14',
-            card: '#10121A',
-            border: '#1F2333',
-            primary: '#DF6B33',
-            'primary-hover': '#C05A28',
-            text: '#E8EAF0',
-            'text-muted': '#8B90A8',
-            input: '#161825',
-            inputBorder: '#252A3D',
-            error: '#f85149',
+            bg: '#F8FAFC',
+            surface: '#FFFFFF',
+            border: '#E2E8F0',
+            primary: '#0055FF',
+            'primary-hover': '#0040CC',
+            accent: '#FF6B00',
+            'accent-hover': '#E56200',
+            text: '#1E293B',
+            'text-muted': '#64748B',
+            input: '#F8FAFC',
+            inputBorder: '#CBD5E1',
+            error: '#DC2626',
+            success: '#16A34A',
           },
           fontFamily: {
             heading: ['Plus Jakarta Sans', 'sans-serif'],
@@ -34,67 +37,68 @@
     }
   </script>
   <style>
-    body { background-color: #090A14; color: #E8EAF0; font-family: 'Inter', sans-serif; }
+    body { background-color: #F8FAFC; color: #1E293B; font-family: 'Inter', sans-serif; }
     h1,h2,h3,h4,h5,h6 { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .gradient-text { background: linear-gradient(135deg, #DF6B33, #F5A623); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .btn-primary { background: #DF6B33; color: #fff; transition: all 0.2s; }
-    .btn-primary:hover { background: #C05A28; transform: scale(0.97); }
-    .btn-secondary { border: 1px solid #2A2F45; color: #8B90A8; transition: all 0.2s; }
-    .btn-secondary:hover { border-color: #DF6B33; color: #DF6B33; transform: scale(0.97); }
+    .gradient-text { background: linear-gradient(135deg, #0055FF, #FF6B00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-primary { background: #FF6B00; color: #fff; transition: all 0.2s; }
+    .btn-primary:hover { background: #E56200; transform: scale(0.97); }
+    .btn-secondary { border: 1.5px solid #CBD5E1; color: #0055FF; background: #fff; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: #0055FF; background: #EFF6FF; transform: scale(0.97); }
     .card-hover { transition: all 0.25s; }
-    .card-hover:hover { border-color: #DF6B33; transform: translateY(-2px); box-shadow: 0 0 24px rgba(223,107,51,0.08); }
+    .card-hover:hover { border-color: #0055FF; transform: translateY(-2px); box-shadow: 0 4px 24px rgba(0,85,255,0.08); }
     .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .animate-spin { animation: spin 0.8s linear infinite; }
     .stat-line { position: relative; }
-    .stat-line::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); width: 1px; height: 40%; background: #1F2333; }
+    .stat-line::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); width: 1px; height: 40%; background: #E2E8F0; }
     .stat-line:last-child::after { display: none; }
+    .nav-scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
   </style>
 </head>
 <body>
 
   <!-- ======================= 1. NAVIGATION ======================= -->
-  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur" style="background: rgba(9,10,20,0.85); border-bottom: 1px solid #1F2333;">
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/90" style="border-bottom: 1px solid #E2E8F0;" id="mainNav">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="#" class="flex items-center gap-2 text-2xl font-extrabold font-heading" style="font-weight:800">
           <span class="gradient-text">Claude Code</span>
         </a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="#chuong-trinh" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Chương trình</a>
-          <a href="#danh-cho-ai" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Đối tượng</a>
-          <a href="#cau-hoi" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">FAQ</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#chuong-trinh" class="text-sm text-[#64748B] hover:text-[#0055FF] transition-colors font-medium">Chương trình</a>
+          <a href="#danh-cho-ai" class="text-sm text-[#64748B] hover:text-[#0055FF] transition-colors font-medium">Đối tượng</a>
+          <a href="#cau-hoi" class="text-sm text-[#64748B] hover:text-[#0055FF] transition-colors font-medium">FAQ</a>
           <a href="#dang-ky" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-semibold">Đăng Ký Ngay</a>
         </div>
-        <button class="md:hidden text-[#8B90A8]" id="mobileMenuBtn">
+        <button class="md:hidden text-[#64748B]" id="mobileMenuBtn">
           <i data-lucide="menu" width="24" height="24"></i>
         </button>
       </div>
     </div>
-    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 space-y-3" style="background: rgba(9,10,20,0.95);">
-      <a href="#chuong-trinh" class="block text-sm text-[#8B90A8] hover:text-[#DF6B33] py-1">Chương trình</a>
-      <a href="#danh-cho-ai" class="block text-sm text-[#8B90A8] hover:text-[#DF6B33] py-1">Đối tượng</a>
-      <a href="#cau-hoi" class="block text-sm text-[#8B90A8] hover:text-[#DF6B33] py-1">FAQ</a>
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 space-y-3 bg-white border-t" style="border-color:#E2E8F0">
+      <a href="#chuong-trinh" class="block text-sm text-[#64748B] hover:text-[#0055FF] py-1">Chương trình</a>
+      <a href="#danh-cho-ai" class="block text-sm text-[#64748B] hover:text-[#0055FF] py-1">Đối tượng</a>
+      <a href="#cau-hoi" class="block text-sm text-[#64748B] hover:text-[#0055FF] py-1">FAQ</a>
       <a href="#dang-ky" class="block btn-primary text-center px-5 py-2.5 rounded-lg text-sm font-semibold mt-2">Đăng Ký Ngay</a>
     </div>
   </nav>
 
   <!-- ======================= 2. HERO ======================= -->
-  <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+  <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(180deg, #EFF6FF 0%, #F8FAFC 60%);">
     <div class="max-w-7xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-xs font-medium" style="background: rgba(223,107,51,0.1); border: 1px solid rgba(223,107,51,0.2); color: #DF6B33;">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-xs font-semibold border" style="background: rgba(0,85,255,0.06); border-color: rgba(0,85,255,0.15); color: #0055FF;">
             <i data-lucide="star" width="12" height="12"></i> Khóa học chuyên sâu 2026
           </div>
-          <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold font-heading leading-tight mb-5" style="font-weight:800">
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold font-heading leading-tight mb-5" style="font-weight:800;color:#1E293B">
             <span class="gradient-text">ĐÀO TẠO VỀ</span><br>An Toàn Người Bệnh
           </h1>
-          <p class="text-base sm:text-lg text-[#8B90A8] leading-relaxed mb-8 max-w-lg">
+          <p class="text-base sm:text-lg leading-relaxed mb-8 max-w-lg" style="color:#64748B">
             Khóa học 12 buổi trang bị kiến thức về An toàn người bệnh theo Bộ Y tế hướng dẫn — từ lý thuyết đến thực hành tại bệnh viện.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 mb-10">
-            <a href="#dang-ky" class="btn-primary px-7 py-3.5 rounded-lg font-semibold text-center flex items-center justify-center gap-2">
+            <a href="#dang-ky" class="btn-primary px-7 py-3.5 rounded-lg font-semibold text-center flex items-center justify-center gap-2 shadow-sm shadow-orange-200">
               <i data-lucide="zap" width="18" height="18"></i> Đăng Ký Khóa Học
             </a>
             <a href="#chuong-trinh" class="btn-secondary px-7 py-3.5 rounded-lg font-semibold text-center flex items-center justify-center gap-2">
@@ -103,55 +107,55 @@
           </div>
           <div class="flex flex-col sm:flex-row gap-4 sm:gap-0">
             <div class="stat-line sm:pr-6 flex items-center gap-2">
-              <i data-lucide="book-open" width="20" height="20" style="color:#DF6B33"></i>
+              <i data-lucide="book-open" width="20" height="20" style="color:#0055FF"></i>
               <div>
-                <div class="text-xl font-bold font-heading" style="color:#DF6B33">12 buổi</div>
-                <div class="text-xs text-[#8B90A8]">Lý thuyết & thực hành</div>
+                <div class="text-xl font-bold font-heading" style="color:#0055FF">12 buổi</div>
+                <div class="text-xs" style="color:#64748B">Lý thuyết &amp; thực hành</div>
               </div>
             </div>
             <div class="stat-line sm:px-6 flex items-center gap-2">
-              <i data-lucide="stethoscope" width="20" height="20" style="color:#DF6B33"></i>
+              <i data-lucide="stethoscope" width="20" height="20" style="color:#0055FF"></i>
               <div>
-                <div class="text-xl font-bold font-heading" style="color:#DF6B33">5 khoa</div>
-                <div class="text-xs text-[#8B90A8]">Thực hành lâm sàng</div>
+                <div class="text-xl font-bold font-heading" style="color:#0055FF">5 khoa</div>
+                <div class="text-xs" style="color:#64748B">Thực hành lâm sàng</div>
               </div>
             </div>
             <div class="sm:pl-6 flex items-center gap-2">
-              <i data-lucide="award" width="20" height="20" style="color:#DF6B33"></i>
+              <i data-lucide="award" width="20" height="20" style="color:#0055FF"></i>
               <div>
-                <div class="text-xl font-bold font-heading" style="color:#DF6B33">Chứng chỉ</div>
-                <div class="text-xs text-[#8B90A8]">Hoàn thành</div>
+                <div class="text-xl font-bold font-heading" style="color:#0055FF">Chứng chỉ</div>
+                <div class="text-xs" style="color:#64748B">Hoàn thành</div>
               </div>
             </div>
           </div>
         </div>
         <div class="hidden lg:flex items-center justify-center">
           <div class="relative w-full max-w-md">
-            <div class="rounded-2xl overflow-hidden border" style="background:#10121A; border-color:#1F2333">
-              <div class="aspect-[4/3] flex items-center justify-center relative" style="background: radial-gradient(ellipse at 50% 0%, rgba(223,107,51,0.12) 0%, transparent 60%);">
+            <div class="rounded-2xl overflow-hidden border shadow-xl shadow-blue-100" style="background:#FFFFFF; border-color:#E2E8F0">
+              <div class="aspect-[4/3] flex items-center justify-center relative" style="background: linear-gradient(135deg, rgba(0,85,255,0.06) 0%, rgba(255,107,0,0.04) 100%);">
                 <div class="text-center px-8">
-                  <div class="mb-6 mx-auto w-20 h-20 rounded-2xl flex items-center justify-center" style="background: rgba(223,107,51,0.15);">
-                    <i data-lucide="shield-check" width="40" height="40" style="color:#DF6B33"></i>
+                  <div class="mb-6 mx-auto w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100" style="background: linear-gradient(135deg, #0055FF, #0040CC);">
+                    <i data-lucide="shield-check" width="40" height="40" style="color:#fff"></i>
                   </div>
                   <div class="text-3xl font-extrabold font-heading gradient-text mb-2">ATNB 2026</div>
-                  <div class="text-sm text-[#8B90A8]">An Toàn Người Bệnh</div>
-                  <div class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(34,197,94,0.1); color:#22c55e; border:1px solid rgba(34,197,94,0.2);">
+                  <div class="text-sm" style="color:#64748B">An Toàn Người Bệnh</div>
+                  <div class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium" style="background: rgba(22,163,74,0.08); color:#16A34A; border:1px solid rgba(22,163,74,0.2);">
                     <i data-lucide="check-circle" width="12" height="12"></i> Bộ Y tế chuẩn
                   </div>
                 </div>
               </div>
-              <div class="p-4 grid grid-cols-3 gap-3 border-t" style="border-color:#1F2333">
-                <div class="text-center p-3 rounded-lg" style="background:#161825">
-                  <div class="text-lg font-bold" style="color:#DF6B33">12</div>
-                  <div class="text-xs text-[#8B90A8]">Tiết học</div>
+              <div class="p-4 grid grid-cols-3 gap-3 border-t" style="border-color:#E2E8F0;background:#F8FAFC">
+                <div class="text-center p-3 rounded-lg border" style="background:#fff;border-color:#E2E8F0">
+                  <div class="text-lg font-bold" style="color:#0055FF">12</div>
+                  <div class="text-xs" style="color:#64748B">Tiết học</div>
                 </div>
-                <div class="text-center p-3 rounded-lg" style="background:#161825">
-                  <div class="text-lg font-bold" style="color:#DF6B33">12</div>
-                  <div class="text-xs text-[#8B90A8]">Chủ đề</div>
+                <div class="text-center p-3 rounded-lg border" style="background:#fff;border-color:#E2E8F0">
+                  <div class="text-lg font-bold" style="color:#0055FF">12</div>
+                  <div class="text-xs" style="color:#64748B">Chủ đề</div>
                 </div>
-                <div class="text-center p-3 rounded-lg" style="background:#161825">
-                  <div class="text-lg font-bold" style="color:#DF6B33">5</div>
-                  <div class="text-xs text-[#8B90A8]">Khoa thực hành</div>
+                <div class="text-center p-3 rounded-lg border" style="background:#fff;border-color:#E2E8F0">
+                  <div class="text-lg font-bold" style="color:#0055FF">5</div>
+                  <div class="text-xs" style="color:#64748B">Khoa thực hành</div>
                 </div>
               </div>
             </div>
@@ -162,56 +166,56 @@
   </section>
 
   <!-- ======================= 3. PROBLEM STATEMENT ======================= -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: #0C0D18;">
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800">
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800;color:#1E293B">
           Bạn đã thực hiện các hoạt động gì để đảm bảo<br /><span class="gradient-text">An toàn cho người bệnh?</span>
         </h2>
-        <p class="text-[#8B90A8]">Những thách thức phổ biến mà nhân viên y tế đang đối mặt</p>
+        <p style="color:#64748B">Những thách thức phổ biến mà nhân viên y tế đang đối mặt</p>
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
-        <div class="card-hover rounded-xl p-5 border" style="background:#10121A; border-color:#1F2333">
+        <div class="card-hover rounded-xl p-5 border bg-white" style="border-color:#E2E8F0">
           <div class="flex items-start gap-3">
-            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(248,81,73,0.1)">
-              <i data-lucide="alert-triangle" width="20" height="20" style="color:#f85149"></i>
+            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(220,38,38,0.06)">
+              <i data-lucide="alert-triangle" width="20" height="20" style="color:#DC2626"></i>
             </div>
             <div>
-              <h3 class="font-semibold font-heading mb-1">Kỹ năng thực hành quá ít</h3>
-              <p class="text-sm text-[#8B90A8]">Kỹ năng thực hành về an toàn người bệnh còn hạn chế, chưa đáp ứng yêu cầu thực tế.</p>
+              <h3 class="font-semibold font-heading mb-1" style="color:#1E293B">Kỹ năng thực hành quá ít</h3>
+              <p class="text-sm" style="color:#64748B">Kỹ năng thực hành về an toàn người bệnh còn hạn chế, chưa đáp ứng yêu cầu thực tế.</p>
             </div>
           </div>
         </div>
-        <div class="card-hover rounded-xl p-5 border" style="background:#10121A; border-color:#1F2333">
+        <div class="card-hover rounded-xl p-5 border bg-white" style="border-color:#E2E8F0">
           <div class="flex items-start gap-3">
-            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(248,81,73,0.1)">
-              <i data-lucide="search-x" width="20" height="20" style="color:#f85149"></i>
+            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(220,38,38,0.06)">
+              <i data-lucide="search-x" width="20" height="20" style="color:#DC2626"></i>
             </div>
             <div>
-              <h3 class="font-semibold font-heading mb-1">Chưa phân loại được SCYT</h3>
-              <p class="text-sm text-[#8B90A8]">Chưa phân loại được sự cố y khoa nên chưa có biện pháp phòng ngừa hiệu quả.</p>
+              <h3 class="font-semibold font-heading mb-1" style="color:#1E293B">Chưa phân loại được SCYT</h3>
+              <p class="text-sm" style="color:#64748B">Chưa phân loại được sự cố y khoa nên chưa có biện pháp phòng ngừa hiệu quả.</p>
             </div>
           </div>
         </div>
-        <div class="card-hover rounded-xl p-5 border" style="background:#10121A; border-color:#1F2333">
+        <div class="card-hover rounded-xl p-5 border bg-white" style="border-color:#E2E8F0">
           <div class="flex items-start gap-3">
-            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(248,81,73,0.1)">
-              <i data-lucide="badge-x" width="20" height="20" style="color:#f85149"></i>
+            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(220,38,38,0.06)">
+              <i data-lucide="badge-x" width="20" height="20" style="color:#DC2626"></i>
             </div>
             <div>
-              <h3 class="font-semibold font-heading mb-1">Chưa có chứng chỉ theo yêu cầu</h3>
-              <p class="text-sm text-[#8B90A8]">Chưa đáp ứng yêu cầu về chứng chỉ đào tạo an toàn người bệnh theo quy định.</p>
+              <h3 class="font-semibold font-heading mb-1" style="color:#1E293B">Chưa có chứng chỉ theo yêu cầu</h3>
+              <p class="text-sm" style="color:#64748B">Chưa đáp ứng yêu cầu về chứng chỉ đào tạo an toàn người bệnh theo quy định.</p>
             </div>
           </div>
         </div>
-        <div class="card-hover rounded-xl p-5 border" style="background:#10121A; border-color:#1F2333">
+        <div class="card-hover rounded-xl p-5 border bg-white" style="border-color:#E2E8F0">
           <div class="flex items-start gap-3">
-            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(248,81,73,0.1)">
-              <i data-lucide="frown" width="20" height="20" style="color:#f85149"></i>
+            <div class="mt-0.5 p-2 rounded-lg" style="background:rgba(220,38,38,0.06)">
+              <i data-lucide="frown" width="20" height="20" style="color:#DC2626"></i>
             </div>
             <div>
-              <h3 class="font-semibold font-heading mb-1">Bản thân chưa cảm thấy an toàn</h3>
-              <p class="text-sm text-[#8B90A8]">Thiếu kiến thức và sự tự tin khi xử lý các tình huống liên quan đến an toàn người bệnh.</p>
+              <h3 class="font-semibold font-heading mb-1" style="color:#1E293B">Bản thân chưa cảm thấy an toàn</h3>
+              <p class="text-sm" style="color:#64748B">Thiếu kiến thức và sự tự tin khi xử lý các tình huống liên quan đến an toàn người bệnh.</p>
             </div>
           </div>
         </div>
@@ -220,239 +224,239 @@
   </section>
 
   <!-- ======================= 4. SOLUTION ======================= -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
+  <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-xs font-medium" style="background:rgba(223,107,51,0.1);border:1px solid rgba(223,107,51,0.2);color:#DF6B33;">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-xs font-semibold border" style="background:rgba(0,85,255,0.06);border-color:rgba(0,85,255,0.15);color:#0055FF;">
           <i data-lucide="sparkles" width="12" height="12"></i> Giải pháp
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4 max-w-3xl mx-auto leading-snug" style="font-weight:800">
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4 max-w-3xl mx-auto leading-snug" style="font-weight:800;color:#1E293B">
           Khóa học cung cấp bộ công cụ thực hành thực tế, giúp chuyển hóa lý thuyết khô khan thành <span class="gradient-text">phản xạ tự nhiên</span> trong công việc hàng ngày
         </h2>
-        <p class="text-[#8B90A8] max-w-2xl mx-auto">Khóa học 12 buổi tập trung vào 12 chủ đề An toàn người bệnh, bám sát hướng dẫn của Bộ Y tế.</p>
+        <p style="color:#64748B;max-width:42rem;margin:0 auto">Khóa học 12 buổi tập trung vào 12 chủ đề An toàn người bệnh, bám sát hướng dẫn của Bộ Y tế.</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="card-hover rounded-xl p-6 border" style="background:#10121A; border-color:#1F2333">
-          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="target" width="24" height="24" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 border bg-white" style="border-color:#E2E8F0">
+          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="target" width="24" height="24" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-lg mb-2">Hướng dẫn từng bước chi tiết</h3>
-          <p class="text-sm text-[#8B90A8]">Buổi 1-7: Lý thuyết kết hợp thực hành tại giảng đường, bám sát thực hành lâm sàng.</p>
-          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(223,107,51,0.1);color:#DF6B33">7 buổi lý thuyết</div>
+          <h3 class="font-bold font-heading text-lg mb-2" style="color:#1E293B">Hướng dẫn từng bước chi tiết</h3>
+          <p class="text-sm" style="color:#64748B">Buổi 1-7: Lý thuyết kết hợp thực hành tại giảng đường, bám sát thực hành lâm sàng.</p>
+          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(0,85,255,0.08);color:#0055FF">7 buổi lý thuyết</div>
         </div>
-        <div class="card-hover rounded-xl p-6 border" style="background:#10121A; border-color:#1F2333">
-          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="wrench" width="24" height="24" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 border bg-white" style="border-color:#E2E8F0">
+          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="wrench" width="24" height="24" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-lg mb-2">Thực hành tại 5 khoa lâm sàng</h3>
-          <p class="text-sm text-[#8B90A8]">Buổi 8-12: Thực hành trực tiếp tại HSTC-CD, Nhiễm, Dược, GMHS, Ngoại cùng chuyên gia.</p>
-          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(223,107,51,0.1);color:#DF6B33">5 buổi thực hành</div>
+          <h3 class="font-bold font-heading text-lg mb-2" style="color:#1E293B">Thực hành tại 5 khoa lâm sàng</h3>
+          <p class="text-sm" style="color:#64748B">Buổi 8-12: Thực hành trực tiếp tại HSTC-CD, Nhiễm, Dược, GMHS, Ngoại cùng chuyên gia.</p>
+          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(0,85,255,0.08);color:#0055FF">5 buổi thực hành</div>
         </div>
-        <div class="card-hover rounded-xl p-6 border" style="background:#10121A; border-color:#1F2333">
-          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="lightbulb" width="24" height="24" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 border bg-white" style="border-color:#E2E8F0">
+          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="lightbulb" width="24" height="24" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-lg mb-2">Học từ hoạt động thực tế</h3>
-          <p class="text-sm text-[#8B90A8]">Thực hành tại bệnh viện, áp dụng ngay kiến thức vào tình huống lâm sàng thực tế.</p>
-          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(223,107,51,0.1);color:#DF6B33">Thực tế bệnh viện</div>
+          <h3 class="font-bold font-heading text-lg mb-2" style="color:#1E293B">Học từ hoạt động thực tế</h3>
+          <p class="text-sm" style="color:#64748B">Thực hành tại bệnh viện, áp dụng ngay kiến thức vào tình huống lâm sàng thực tế.</p>
+          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(0,85,255,0.08);color:#0055FF">Thực tế bệnh viện</div>
         </div>
-        <div class="card-hover rounded-xl p-6 border" style="background:#10121A; border-color:#1F2333">
-          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="clipboard-check" width="24" height="24" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 border bg-white" style="border-color:#E2E8F0">
+          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="clipboard-check" width="24" height="24" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-lg mb-2">Bài đánh giá đầu vào & đầu ra</h3>
-          <p class="text-sm text-[#8B90A8]">Kiểm tra kiến thức trước và sau khóa học, đảm bảo tiến bộ rõ ràng.</p>
-          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(223,107,51,0.1);color:#DF6B33">Pre-test & Post-test</div>
+          <h3 class="font-bold font-heading text-lg mb-2" style="color:#1E293B">Bài đánh giá đầu vào &amp; đầu ra</h3>
+          <p class="text-sm" style="color:#64748B">Kiểm tra kiến thức trước và sau khóa học, đảm bảo tiến bộ rõ ràng.</p>
+          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(0,85,255,0.08);color:#0055FF">Pre-test &amp; Post-test</div>
         </div>
-        <div class="card-hover rounded-xl p-6 border" style="background:#10121A; border-color:#1F2333">
-          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="users" width="24" height="24" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 border bg-white" style="border-color:#E2E8F0">
+          <div class="mb-4 w-12 h-12 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="users" width="24" height="24" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-lg mb-2">Cộng đồng & Group Zalo</h3>
-          <p class="text-sm text-[#8B90A8]">Kết nối cộng đồng học viên, nhận hỗ trợ liên tục sau khóa học qua Zalo.</p>
-          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(223,107,51,0.1);color:#DF6B33">Hỗ trợ sau khóa</div>
+          <h3 class="font-bold font-heading text-lg mb-2" style="color:#1E293B">Cộng đồng &amp; Group Zalo</h3>
+          <p class="text-sm" style="color:#64748B">Kết nối cộng đồng học viên, nhận hỗ trợ liên tục sau khóa học qua Zalo.</p>
+          <div class="mt-4 text-xs font-medium px-2.5 py-1 rounded-full inline-block" style="background:rgba(0,85,255,0.08);color:#0055FF">Hỗ trợ sau khóa</div>
         </div>
-        <div class="card-hover rounded-xl p-6 border flex flex-col items-center justify-center text-center" style="background:rgba(223,107,51,0.05); border-color:rgba(223,107,51,0.15)">
+        <div class="card-hover rounded-xl p-6 border flex flex-col items-center justify-center text-center" style="background:linear-gradient(135deg, rgba(0,85,255,0.05), rgba(255,107,0,0.04)); border-color:rgba(0,85,255,0.15)">
           <div class="text-4xl font-extrabold font-heading gradient-text mb-1" style="font-weight:800">12</div>
-          <div class="text-sm font-semibold font-heading">Chủ đề ATNB</div>
-          <div class="text-xs text-[#8B90A8] mt-1">Theo Bộ Y tế</div>
+          <div class="text-sm font-semibold font-heading" style="color:#1E293B">Chủ đề ATNB</div>
+          <div class="text-xs mt-1" style="color:#64748B">Theo Bộ Y tế</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ======================= 5. TARGET AUDIENCE ======================= -->
-  <section id="danh-cho-ai" class="py-20 px-4 sm:px-6 lg:px-8" style="background:#0C0D18;">
+  <section id="danh-cho-ai" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800">Khóa Học Dành Cho <span class="gradient-text">Ai?</span></h2>
-        <p class="text-[#8B90A8] max-w-xl mx-auto">Khóa học được thiết kế phù hợp với nhiều đối tượng trong ngành y tế</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800;color:#1E293B">Khóa Học Dành Cho <span class="gradient-text">Ai?</span></h2>
+        <p style="color:#64748B;max-width:42rem;margin:0 auto">Khóa học được thiết kế phù hợp với nhiều đối tượng trong ngành y tế</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="card-hover rounded-xl p-6 text-center border" style="background:#10121A; border-color:#1F2333">
-          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="heart-pulse" width="28" height="28" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 text-center border bg-white" style="border-color:#E2E8F0">
+          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="heart-pulse" width="28" height="28" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-base mb-1">Điều dưỡng / KTV</h3>
-          <p class="text-sm text-[#8B90A8]">Người trực tiếp chăm sóc và theo dõi người bệnh hàng ngày</p>
+          <h3 class="font-bold font-heading text-base mb-1" style="color:#1E293B">Điều dưỡng / KTV</h3>
+          <p class="text-sm" style="color:#64748B">Người trực tiếp chăm sóc và theo dõi người bệnh hàng ngày</p>
         </div>
-        <div class="card-hover rounded-xl p-6 text-center border" style="background:#10121A; border-color:#1F2333">
-          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="stethoscope" width="28" height="28" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 text-center border bg-white" style="border-color:#E2E8F0">
+          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="stethoscope" width="28" height="28" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-base mb-1">Bác sĩ</h3>
-          <p class="text-sm text-[#8B90A8]">Cần nâng cao kỹ năng nhận diện và phòng ngừa sự cố y khoa</p>
+          <h3 class="font-bold font-heading text-base mb-1" style="color:#1E293B">Bác sĩ</h3>
+          <p class="text-sm" style="color:#64748B">Cần nâng cao kỹ năng nhận diện và phòng ngừa sự cố y khoa</p>
         </div>
-        <div class="card-hover rounded-xl p-6 text-center border" style="background:#10121A; border-color:#1F2333">
-          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="pill" width="28" height="28" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 text-center border bg-white" style="border-color:#E2E8F0">
+          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="pill" width="28" height="28" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-base mb-1">Dược sĩ</h3>
-          <p class="text-sm text-[#8B90A8]">Chịu trách nhiệm phát thuốc và theo dõi phản ứng thuốc cho người bệnh</p>
+          <h3 class="font-bold font-heading text-base mb-1" style="color:#1E293B">Dược sĩ</h3>
+          <p class="text-sm" style="color:#64748B">Chịu trách nhiệm phát thuốc và theo dõi phản ứng thuốc cho người bệnh</p>
         </div>
-        <div class="card-hover rounded-xl p-6 text-center border" style="background:#10121A; border-color:#1F2333">
-          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-            <i data-lucide="clipboard-list" width="28" height="28" style="color:#DF6B33"></i>
+        <div class="card-hover rounded-xl p-6 text-center border bg-white" style="border-color:#E2E8F0">
+          <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+            <i data-lucide="clipboard-list" width="28" height="28" style="color:#0055FF"></i>
           </div>
-          <h3 class="font-bold font-heading text-base mb-1">Chuyên viên phòng QLCL</h3>
-          <p class="text-sm text-[#8B90A8]">Phụ trách quản lý chất lượng, giám sát an toàn người bệnh tại bệnh viện</p>
+          <h3 class="font-bold font-heading text-base mb-1" style="color:#1E293B">Chuyên viên phòng QLCL</h3>
+          <p class="text-sm" style="color:#64748B">Phụ trách quản lý chất lượng, giám sát an toàn người bệnh tại bệnh viện</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ======================= 6. COURSE CONTENT ======================= -->
-  <section id="chuong-trinh" class="py-20 px-4 sm:px-6 lg:px-8">
+  <section id="chuong-trinh" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-14">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-xs font-medium" style="background:rgba(223,107,51,0.1);border:1px solid rgba(223,107,51,0.2);color:#DF6B33;">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-xs font-semibold border" style="background:rgba(0,85,255,0.06);border-color:rgba(0,85,255,0.15);color:#0055FF;">
           <i data-lucide="list" width="12" height="12"></i> Nội dung khóa học
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800">Chương Trình <span class="gradient-text">12 Buổi</span></h2>
-        <p class="text-[#8B90A8]">12 tiết học vừa lý thuyết vừa thực hành — hoàn thành kiến thức có thể áp dụng ngay tại cơ sở y tế</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800;color:#1E293B">Chương Trình <span class="gradient-text">12 Buổi</span></h2>
+        <p style="color:#64748B">12 tiết học vừa lý thuyết vừa thực hành — hoàn thành kiến thức có thể áp dụng ngay tại cơ sở y tế</p>
       </div>
       <div class="space-y-3" id="courseAccordion">
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">01</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">01</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">Tổng quan về an toàn người bệnh &amp; sự cố y khoa</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">Tổng quan về an toàn người bệnh &amp; sự cố y khoa</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Khái niệm an toàn người bệnh, phân loại sự cố y khoa (SCYT), quy trình báo cáo và phân tích nguyên nhân gốc rễ (RCA) theo Bộ Y tế.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">02</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">02</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">Té ngã</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">Té ngã</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Đánh giá nguy cơ té ngã, sử dụng thang điểm Morse, xây dựng kế hoạch phòng ngừa và ứng phó khi xảy ra té ngã tại giường bệnh.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">03</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">03</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">Cải thiện thông tin — giao tiếp giữa NVYT với người bệnh</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">Cải thiện thông tin — giao tiếp giữa NVYT với người bệnh</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Giao tiếp SBAR giữa nhân viên y tế và người bệnh, kỹ năng lắng nghe, truyền đạt thông tin an toàn và hiệu quả trong chăm sóc.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">04</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">04</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">An toàn sử dụng thiết bị y tế</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">An toàn sử dụng thiết bị y tế</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Quy trình sử dụng thiết bị y tế an toàn, kiểm tra trước sử dụng, phòng ngừa tai nạn do thiết bị và báo cáo sự cố liên quan.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">05</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">05</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">An toàn sử dụng thuốc</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">An toàn sử dụng thuốc</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Nguyên tắc 5 đúng trong dùng thuốc, phòng tránh sai sót thuốc, nhận diện phản ứng có hại của thuốc (ADR) và quy trình báo cáo.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">06</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">06</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">Kiểm soát nhiễm khuẩn</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">Kiểm soát nhiễm khuẩn</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
               <p>Rửa tay 6 bước theo WHO, phòng ngừa lây truyền nhiễm khuẩn bệnh viện (NKBV), sử dụng trang thiết bị phòng hộ và vệ sinh môi trường.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">07</div>
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">07</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">An toàn phẫu thuật</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">Lý thuyết &amp; thực hành — 1 tiết</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">An toàn phẫu thuật</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">Lý thuyết &amp; thực hành — 1 tiết</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
-              <p> checklist an toàn phẫu thuật WHO, xác nhận đúng bệnh nhân — đúng phẫu thuật — đúng vị trí, phòng ngừa sai sót trong quá trình mổ.</p>
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
+              <p>Checklist an toàn phẫu thuật WHO, xác nhận đúng bệnh nhân — đúng phẫu thuật — đúng vị trí, phòng ngừa sai sót trong quá trình mổ.</p>
             </div>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A; border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="course-btn w-full flex items-center gap-4 p-5 text-left" onclick="toggleCourse(this)">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(223,107,51,0.15);color:#DF6B33">08–12</div>
+            <div class="flex-shrink-0 w-14 h-10 rounded-lg flex items-center justify-center font-bold font-heading text-sm" style="background:rgba(0,85,255,0.1);color:#0055FF">08–12</div>
             <div class="flex-1">
-              <h3 class="font-semibold font-heading text-sm sm:text-base">Trải nghiệm thực tế — Hướng dẫn thực hành tại các khoa</h3>
-              <p class="text-xs text-[#8B90A8] mt-0.5">5 tiết thực hành — HSTC-CD, Nhiễm, Dược, GMHS, Ngoại</p>
+              <h3 class="font-semibold font-heading text-sm sm:text-base" style="color:#1E293B">Trải nghiệm thực tế — Hướng dẫn thực hành tại các khoa</h3>
+              <p class="text-xs mt-0.5" style="color:#64748B">5 tiết thực hành — HSTC-CD, Nhiễm, Dược, GMHS, Ngoại</p>
             </div>
-            <i data-lucide="chevron-down" width="18" height="18" class="text-[#8B90A8] flex-shrink-0 course-icon transition-transform duration-200"></i>
+            <i data-lucide="chevron-down" width="18" height="18" class="text-muted flex-shrink-0 course-icon transition-transform duration-200" style="color:#64748B"></i>
           </button>
           <div class="course-content hidden px-5 pb-5">
-            <div class="ml-14 p-4 rounded-lg text-sm text-[#8B90A8]" style="background:#161825">
-              <p class="mb-2"><strong style="color:#E8EAF0">Buổi 08 — HSTC-CD:</strong> Thực hành an toàn tại Khoa Hồi sức tích cực — Chống độc.</p>
-              <p class="mb-2"><strong style="color:#E8EAF0">Buổi 09 — Nhiễm:</strong> Kiểm soát nhiễm khuẩn và phòng ngừa lây truyền tại Khoa Nhiễm.</p>
-              <p class="mb-2"><strong style="color:#E8EAF0">Buổi 10 — Dược:</strong> Thực hành phát thuốc an toàn và kiểm tra tủ thuốc tại Khoa Dược.</p>
-              <p class="mb-2"><strong style="color:#E8EAF0">Buổi 11 — GMHS:</strong> Hướng dẫn sử dụng thiết bị y tế an toàn tại phòng GMHS.</p>
-              <p><strong style="color:#E8EAF0">Buổi 12 — Ngoại:</strong> Thực hành an toàn phẫu thuật và chăm sóc sau mổ tại Khoa Ngoại.</p>
+            <div class="ml-14 p-4 rounded-lg text-sm" style="background:#F8FAFC;color:#64748B">
+              <p class="mb-2"><strong style="color:#1E293B">Buổi 08 — HSTC-CD:</strong> Thực hành an toàn tại Khoa Hồi sức tích cực — Chống độc.</p>
+              <p class="mb-2"><strong style="color:#1E293B">Buổi 09 — Nhiễm:</strong> Kiểm soát nhiễm khuẩn và phòng ngừa lây truyền tại Khoa Nhiễm.</p>
+              <p class="mb-2"><strong style="color:#1E293B">Buổi 10 — Dược:</strong> Thực hành phát thuốc an toàn và kiểm tra tủ thuốc tại Khoa Dược.</p>
+              <p class="mb-2"><strong style="color:#1E293B">Buổi 11 — GMHS:</strong> Hướng dẫn sử dụng thiết bị y tế an toàn tại phòng GMHS.</p>
+              <p><strong style="color:#1E293B">Buổi 12 — Ngoại:</strong> Thực hành an toàn phẫu thuật và chăm sóc sau mổ tại Khoa Ngoại.</p>
             </div>
           </div>
         </div>
@@ -461,98 +465,98 @@
   </section>
 
   <!-- ======================= 7. SOCIAL PROOF ======================= -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8" style="background:#0C0D18;">
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800">Sản Phẩm <span class="gradient-text">Học Viên</span></h2>
-        <p class="text-[#8B90A8]">Những gì bạn sẽ đạt được sau khóa học</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800;color:#1E293B">Sản Phẩm <span class="gradient-text">Học Viên</span></h2>
+        <p style="color:#64748B">Những gì bạn sẽ đạt được sau khóa học</p>
       </div>
-      <div class="card-hover rounded-2xl border overflow-hidden mb-10" style="background:#10121A; border-color:#1F2333">
+      <div class="card-hover rounded-2xl border overflow-hidden mb-10 bg-white shadow-sm" style="border-color:#E2E8F0">
         <div class="p-6 sm:p-8">
           <div class="flex flex-col sm:flex-row gap-6 items-start">
-            <div class="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center" style="background:rgba(223,107,51,0.12)">
-              <i data-lucide="file-check-2" width="28" height="28" style="color:#DF6B33"></i>
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center shadow-sm" style="background:rgba(0,85,255,0.08)">
+              <i data-lucide="file-check-2" width="28" height="28" style="color:#0055FF"></i>
             </div>
             <div class="flex-1">
               <div class="flex flex-wrap items-center gap-2 mb-2">
-                <h3 class="font-bold font-heading text-xl">Quy định thực hiện an toàn người bệnh tại bệnh viện</h3>
-                <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2)">Hoàn thành</span>
+                <h3 class="font-bold font-heading text-xl" style="color:#1E293B">Quy định thực hiện an toàn người bệnh tại bệnh viện</h3>
+                <span class="text-xs px-2.5 py-1 rounded-full font-medium" style="background:rgba(22,163,74,0.08);color:#16A34A;border:1px solid rgba(22,163,74,0.2)">Hoàn thành</span>
               </div>
-              <p class="text-[#8B90A8] text-sm mb-4">Sau khóa học, học viên tự tin xây dựng quy định thực hiện an toàn người bệnh tại bệnh viện — áp dụng ngay vào công việc thực tế.</p>
+              <p style="color:#64748B;font-size:0.875rem;margin-bottom:1rem">Sau khóa học, học viên tự tin xây dựng quy định thực hiện an toàn người bệnh tại bệnh viện — áp dụng ngay vào công việc thực tế.</p>
               <div class="flex flex-wrap gap-3">
-                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#161825;color:#8B90A8;border:1px solid #252A3D">Phân loại SCYT</span>
-                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#161825;color:#8B90A8;border:1px solid #252A3D">Quy trình phòng ngừa</span>
-                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#161825;color:#8B90A8;border:1px solid #252A3D">Báo cáo sự cố</span>
-                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#161825;color:#8B90A8;border:1px solid #252A3D">Đánh giá nguy cơ</span>
+                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0">Phân loại SCYT</span>
+                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0">Quy trình phòng ngừa</span>
+                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0">Báo cáo sự cố</span>
+                <span class="text-xs px-2.5 py-1 rounded-full" style="background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0">Đánh giá nguy cơ</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px border-t" style="background:#1F2333;border-color:#1F2333">
-          <div class="text-center p-4" style="background:#0C0D18">
-            <div class="text-xl font-bold font-heading" style="color:#DF6B33">12 tiết</div>
-            <div class="text-xs text-[#8B90A8]">Học tập</div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px border-t" style="background:#E2E8F0;border-color:#E2E8F0">
+          <div class="text-center p-4 bg-white">
+            <div class="text-xl font-bold font-heading" style="color:#0055FF">12 tiết</div>
+            <div class="text-xs" style="color:#64748B">Học tập</div>
           </div>
-          <div class="text-center p-4" style="background:#0C0D18">
-            <div class="text-xl font-bold font-heading" style="color:#DF6B33">5 khoa</div>
-            <div class="text-xs text-[#8B90A8]">Thực hành</div>
+          <div class="text-center p-4 bg-white">
+            <div class="text-xl font-bold font-heading" style="color:#0055FF">5 khoa</div>
+            <div class="text-xs" style="color:#64748B">Thực hành</div>
           </div>
-          <div class="text-center p-4" style="background:#0C0D18">
-            <div class="text-xl font-bold font-heading" style="color:#DF6B33">12</div>
-            <div class="text-xs text-[#8B90A8]">Chủ đề</div>
+          <div class="text-center p-4 bg-white">
+            <div class="text-xl font-bold font-heading" style="color:#0055FF">12</div>
+            <div class="text-xs" style="color:#64748B">Chủ đề</div>
           </div>
-          <div class="text-center p-4" style="background:#0C0D18">
-            <div class="text-xl font-bold font-heading" style="color:#DF6B33">Chứng chỉ</div>
-            <div class="text-xs text-[#8B90A8]">Hoàn thành</div>
+          <div class="text-center p-4 bg-white">
+            <div class="text-xl font-bold font-heading" style="color:#0055FF">Chứng chỉ</div>
+            <div class="text-xs" style="color:#64748B">Hoàn thành</div>
           </div>
         </div>
       </div>
-      <div class="rounded-xl p-6 sm:p-8 border" style="background:rgba(223,107,51,0.05);border-color:rgba(223,107,51,0.15)">
+      <div class="rounded-xl p-6 sm:p-8 border text-center" style="background:linear-gradient(135deg, rgba(0,85,255,0.04), rgba(255,107,0,0.03));border-color:rgba(0,85,255,0.15)">
         <div class="flex items-center justify-center gap-3 mb-3">
-          <i data-lucide="award" width="24" height="24" style="color:#DF6B33;opacity:0.6"></i>
-          <span class="text-sm font-semibold" style="color:#DF6B33">100% Học viên hoàn thành bài lượng giá</span>
+          <i data-lucide="award" width="24" height="24" style="color:#0055FF"></i>
+          <span class="text-sm font-semibold" style="color:#0055FF">100% Học viên hoàn thành bài lượng giá</span>
         </div>
-        <p class="text-center text-[#8B90A8] text-sm">Mọi học viên sau khóa học đều được đánh giá kiến thức và nhận chứng chỉ hoàn thành.</p>
+        <p class="text-center text-sm" style="color:#64748B">Mọi học viên sau khóa học đều được đánh giá kiến thức và nhận chứng chỉ hoàn thành.</p>
       </div>
     </div>
   </section>
 
   <!-- ======================= 8. CTA SECTION ======================= -->
-  <section id="dang-ky" class="py-20 px-4 sm:px-6 lg:px-8">
+  <section id="dang-ky" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);">
     <div class="max-w-3xl mx-auto">
-      <div class="rounded-2xl border p-8 sm:p-12 text-center" style="background:#10121A; border-color:#1F2333; background-image: radial-gradient(ellipse at 50% 0%, rgba(223,107,51,0.1) 0%, transparent 60%);">
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-3" style="font-weight:800">Sẵn Sàng Bắt Đầu <span class="gradient-text">Chưa?</span></h2>
-        <p class="text-[#8B90A8] mb-8 max-w-md mx-auto">Đăng ký ngay để nhận thông tin chi tiết về lịch học, học phí và ưu đãi đặc biệt</p>
+      <div class="rounded-2xl border p-8 sm:p-12 text-center bg-white shadow-sm" style="border-color:#E2E8F0; background-image: radial-gradient(ellipse at 50% 0%, rgba(0,85,255,0.08) 0%, transparent 60%);">
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-3" style="font-weight:800;color:#1E293B">Sẵn Sàng Bắt Đầu <span class="gradient-text">Chưa?</span></h2>
+        <p style="color:#64748B;margin-bottom:2rem;max-width:28rem;margin-left:auto;margin-right:auto">Đăng ký ngay để nhận thông tin chi tiết về lịch học, học phí và ưu đãi đặc biệt</p>
         <form class="space-y-3 max-w-md mx-auto" id="registerForm" onsubmit="handleRegister(event)">
           <input type="text" placeholder="Họ và tên" required
             class="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-all"
-            style="background:#161825;border-color:#252A3D;color:#E8EAF0;font-family:'Inter',sans-serif"
-            onfocus="this.style.borderColor='#DF6B33';this.style.boxShadow='0 0 0 3px rgba(223,107,51,0.1)'"
-            onblur="this.style.borderColor='#252A3D';this.style.boxShadow='none'" />
+            style="background:#F8FAFC;border-color:#CBD5E1;color:#1E293B;font-family:'Inter',sans-serif"
+            onfocus="this.style.borderColor='#0055FF';this.style.boxShadow='0 0 0 3px rgba(0,85,255,0.1)'"
+            onblur="this.style.borderColor='#CBD5E1';this.style.boxShadow='none'" />
           <input type="email" placeholder="Email của bạn" required
             class="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-all"
-            style="background:#161825;border-color:#252A3D;color:#E8EAF0;font-family:'Inter',sans-serif"
-            onfocus="this.style.borderColor='#DF6B33';this.style.boxShadow='0 0 0 3px rgba(223,107,51,0.1)'"
-            onblur="this.style.borderColor='#252A3D';this.style.boxShadow='none'" />
+            style="background:#F8FAFC;border-color:#CBD5E1;color:#1E293B;font-family:'Inter',sans-serif"
+            onfocus="this.style.borderColor='#0055FF';this.style.boxShadow='0 0 0 3px rgba(0,85,255,0.1)'"
+            onblur="this.style.borderColor='#CBD5E1';this.style.boxShadow='none'" />
           <input type="tel" placeholder="Số điện thoại (tuỳ chọn)"
             class="w-full px-4 py-3 rounded-lg text-sm border outline-none transition-all"
-            style="background:#161825;border-color:#252A3D;color:#E8EAF0;font-family:'Inter',sans-serif"
-            onfocus="this.style.borderColor='#DF6B33';this.style.boxShadow='0 0 0 3px rgba(223,107,51,0.1)'"
-            onblur="this.style.borderColor='#252A3D';this.style.boxShadow='none'" />
-          <button type="submit" id="submitBtn" class="btn-primary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+            style="background:#F8FAFC;border-color:#CBD5E1;color:#1E293B;font-family:'Inter',sans-serif"
+            onfocus="this.style.borderColor='#0055FF';this.style.boxShadow='0 0 0 3px rgba(0,85,255,0.1)'"
+            onblur="this.style.borderColor='#CBD5E1';this.style.boxShadow='none'" />
+          <button type="submit" id="submitBtn" class="btn-primary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm shadow-orange-200">
             <i data-lucide="send" width="16" height="16"></i> Đăng Ký Ngay
           </button>
         </form>
-        <div id="successMsg" class="hidden mt-4 text-sm font-medium" style="color:#22c55e">
+        <div id="successMsg" class="hidden mt-4 text-sm font-medium" style="color:#16A34A">
           <i data-lucide="check-circle" width="16" height="16" class="inline mr-1"></i> Đăng ký thành công! Chúng tôi sẽ liên hệ sớm.
         </div>
-        <div class="mt-6 pt-6 border-t" style="border-color:#1F2333">
-          <p class="text-sm text-[#8B90A8] mb-2">Bạn cần hỗ trợ ngay?</p>
+        <div class="mt-6 pt-6 border-t" style="border-color:#E2E8F0">
+          <p class="text-sm mb-2" style="color:#64748B">Bạn cần hỗ trợ ngay?</p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a href="tel:02363779779" class="btn-secondary px-6 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2">
               <i data-lucide="phone" width="16" height="16"></i> Liên Hệ Hỗ Trợ
             </a>
-            <a href="tel:02363779779" class="flex items-center gap-2 text-sm font-medium" style="color:#DF6B33">
+            <a href="tel:02363779779" class="flex items-center gap-2 text-sm font-semibold" style="color:#FF6B00">
               <i data-lucide="headphones" width="16" height="16"></i> Hotline: 0236.3.779.779
             </a>
           </div>
@@ -562,64 +566,64 @@
   </section>
 
   <!-- ======================= 9. FAQ ======================= -->
-  <section id="cau-hoi" class="py-20 px-4 sm:px-6 lg:px-8" style="background:#0C0D18;">
+  <section id="cau-hoi" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800">Câu Hỏi <span class="gradient-text">Thường Gặp</span></h2>
-        <p class="text-[#8B90A8]">Giải đáp những thắc mắc phổ biến nhất về khóa học</p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mb-4" style="font-weight:800;color:#1E293B">Câu Hỏi <span class="gradient-text">Thường Gặp</span></h2>
+        <p style="color:#64748B">Giải đáp những thắc mắc phổ biến nhất về khóa học</p>
       </div>
       <div class="space-y-2" id="faqList">
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Tôi là nhân viên y tế mới, có đăng ký được không?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Tôi là nhân viên y tế mới, có đăng ký được không?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
             <p>Có! Khóa học được thiết kế phù hợp cho cả nhân viên y tế mới và đã có kinh nghiệm. Giảng viên hướng dẫn từ cơ bản đến thực hành, đảm bảo mọi học viên đều theo kịp và nắm vững kiến thức.</p>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Khóa này dành cho những ai?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Khóa này dành cho những ai?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
             <p>Khóa học dành cho Điều dưỡng/KTV, Bác sĩ, Dược sĩ và Chuyên viên phòng Quản lý chất lượng — những người cần trang bị kiến thức và chứng chỉ An toàn người bệnh theo quy định của Bộ Y tế.</p>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Khóa này có phí là bao nhiêu?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Khóa này có phí là bao nhiêu?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
-            <p>Học phí sẽ được thông báo chi tiết khi bạn đăng ký. Vui lòng liên hệ hotline <strong style="color:#E8EAF0">0236.3.779.779</strong> hoặc điền form đăng ký để nhận thông tin học phí và ưu đãi đặc biệt.</p>
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
+            <p>Học phí sẽ được thông báo chi tiết khi bạn đăng ký. Vui lòng liên hệ hotline <strong style="color:#1E293B">0236.3.779.779</strong> hoặc điền form đăng ký để nhận thông tin học phí và ưu đãi đặc biệt.</p>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Hình thức học online hay offline?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Hình thức học online hay offline?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
             <p>Khóa học được tổ chức theo hình thức offline trực tiếp tại Bệnh viện Nhi đồng thành phố Cần Thơ, kết hợp lý thuyết tại giảng đường và thực hành tại các khoa lâm sàng (HSTC-CD, Nhiễm, Dược, GMHS, Ngoại).</p>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Nếu tôi không hài lòng thì sao?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Nếu tôi không hài lòng thì sao?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
-            <p>Chúng tôi cam kết chất lượng khóa học. Nếu trong buổi học đầu tiên bạn cảm thấy không phù hợp, vui lòng liên hệ hotline <strong style="color:#E8EAF0">0236.3.779.779</strong> để được hỗ trợ và giải quyết thỏa đáng.</p>
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
+            <p>Chúng tôi cam kết chất lượng khóa học. Nếu trong buổi học đầu tiên bạn cảm thấy không phù hợp, vui lòng liên hệ hotline <strong style="color:#1E293B">0236.3.779.779</strong> để được hỗ trợ và giải quyết thỏa đáng.</p>
           </div>
         </div>
-        <div class="rounded-xl border" style="background:#10121A;border-color:#1F2333">
+        <div class="rounded-xl border bg-white" style="border-color:#E2E8F0">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
-            <span class="font-semibold font-heading text-sm pr-4">Khóa học có mở định kỳ không hay khi có thông báo?</span>
-            <i data-lucide="plus" width="18" height="18" class="faq-icon text-[#8B90A8] flex-shrink-0 transition-transform duration-200"></i>
+            <span class="font-semibold font-heading text-sm pr-4" style="color:#1E293B">Khóa học có mở định kỳ không hay khi có thông báo?</span>
+            <i data-lucide="plus" width="18" height="18" class="faq-icon flex-shrink-0 transition-transform duration-200" style="color:#64748B"></i>
           </button>
-          <div class="faq-body hidden px-5 text-sm text-[#8B90A8] pb-5">
+          <div class="faq-body hidden px-5 text-sm pb-5" style="color:#64748B">
             <p>Khóa học được tổ chức theo định kỳ hàng tháng khi đủ số lượng đăng ký. Bạn có thể đăng ký trước để được thông báo lịch khai giảng sớm nhất qua email hoặc Zalo.</p>
           </div>
         </div>
@@ -628,83 +632,81 @@
   </section>
 
   <!-- ======================= 10. FOOTER ======================= -->
-  <footer class="py-16 px-4 sm:px-6 lg:px-8 border-t" style="border-color:#1F2333;background:#080A12">
+  <footer class="py-16 px-4 sm:px-6 lg:px-8 border-t" style="border-color:#E2E8F0;background:#F8FAFC">
     <div class="max-w-6xl mx-auto">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div class="lg:col-span-1">
           <div class="text-2xl font-extrabold font-heading mb-3" style="font-weight:800">
             <span class="gradient-text">Claude Code</span>
           </div>
-          <p class="text-sm text-[#8B90A8] mb-4">Đào tạo An toàn Người bệnh theo chuẩn Bộ Y tế — từ lý thuyết đến thực hành lâm sàng.</p>
+          <p class="text-sm mb-4" style="color:#64748B">Đào tạo An toàn Người bệnh theo chuẩn Bộ Y tế — từ lý thuyết đến thực hành lâm sàng.</p>
           <div class="flex gap-3">
-            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#161825;border:1px solid #252A3D;color:#8B90A8" onmouseover="this.style.borderColor='#DF6B33';this.style.color='#DF6B33'" onmouseout="this.style.borderColor='#252A3D';this.style.color='#8B90A8'">
+            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#fff;border:1px solid #E2E8F0;color:#64748B" onmouseover="this.style.borderColor='#0055FF';this.style.color='#0055FF'" onmouseout="this.style.borderColor='#E2E8F0';this.style.color='#64748B'">
               <i data-lucide="facebook" width="16" height="16"></i>
             </a>
-            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#161825;border:1px solid #252A3D;color:#8B90A8" onmouseover="this.style.borderColor='#DF6B33';this.style.color='#DF6B33'" onmouseout="this.style.borderColor='#252A3D';this.style.color='#8B90A8'">
+            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#fff;border:1px solid #E2E8F0;color:#64748B" onmouseover="this.style.borderColor='#0055FF';this.style.color='#0055FF'" onmouseout="this.style.borderColor='#E2E8F0';this.style.color='#64748B'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
             </a>
-            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#161825;border:1px solid #252A3D;color:#8B90A8" onmouseover="this.style.borderColor='#DF6B33';this.style.color='#DF6B33'" onmouseout="this.style.borderColor='#252A3D';this.style.color='#8B90A8'">
+            <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-colors" style="background:#fff;border:1px solid #E2E8F0;color:#64748B" onmouseover="this.style.borderColor='#0055FF';this.style.color='#0055FF'" onmouseout="this.style.borderColor='#E2E8F0';this.style.color='#64748B'">
               <i data-lucide="linkedin" width="16" height="16"></i>
             </a>
           </div>
         </div>
         <div>
-          <h4 class="font-bold font-heading text-sm mb-4">Liên kết nhanh</h4>
+          <h4 class="font-bold font-heading text-sm mb-4" style="color:#1E293B">Liên kết nhanh</h4>
           <ul class="space-y-2.5">
-            <li><a href="#chuong-trinh" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Chương trình</a></li>
-            <li><a href="#danh-cho-ai" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Đối tượng</a></li>
-            <li><a href="#dang-ky" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Đăng ký</a></li>
-            <li><a href="#cau-hoi" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">FAQ</a></li>
+            <li><a href="#chuong-trinh" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Chương trình</a></li>
+            <li><a href="#danh-cho-ai" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Đối tượng</a></li>
+            <li><a href="#dang-ky" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Đăng ký</a></li>
+            <li><a href="#cau-hoi" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">FAQ</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-bold font-heading text-sm mb-4">Liên hệ</h4>
+          <h4 class="font-bold font-heading text-sm mb-4" style="color:#1E293B">Liên hệ</h4>
           <ul class="space-y-3">
             <li class="flex items-start gap-2">
-              <i data-lucide="map-pin" width="16" height="16" class="mt-0.5 flex-shrink-0" style="color:#DF6B33"></i>
-              <span class="text-sm text-[#8B90A8]">Bệnh viện Nhi đồng thành phố Cần Thơ — 345 Nguyễn Văn Cừ, An Bình, Cần Thơ</span>
+              <i data-lucide="map-pin" width="16" height="16" class="mt-0.5 flex-shrink-0" style="color:#0055FF"></i>
+              <span class="text-sm" style="color:#64748B">Bệnh viện Nhi đồng thành phố Cần Thơ — 345 Nguyễn Văn Cừ, An Bình, Cần Thơ</span>
             </li>
             <li class="flex items-center gap-2">
-              <i data-lucide="phone" width="16" height="16" class="flex-shrink-0" style="color:#DF6B33"></i>
-              <a href="tel:02363779779" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">0236.3.779.779</a>
+              <i data-lucide="phone" width="16" height="16" class="flex-shrink-0" style="color:#0055FF"></i>
+              <a href="tel:02363779779" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">0236.3.779.779</a>
             </li>
             <li class="flex items-center gap-2">
-              <i data-lucide="mail" width="16" height="16" class="flex-shrink-0" style="color:#DF6B33"></i>
-              <a href="mailto:contact@softech.edu.vn" class="text-sm text-[#8B90A8] hover:text-[#DF6B33] transition-colors">contact@softech.edu.vn</a>
+              <i data-lucide="mail" width="16" height="16" class="flex-shrink-0" style="color:#0055FF"></i>
+              <a href="mailto:contact@softech.edu.vn" class="text-sm transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">contact@softech.edu.vn</a>
             </li>
           </ul>
         </div>
         <div>
-          <h4 class="font-bold font-heading text-sm mb-4">Nhận thông tin khóa học miễn phí</h4>
-          <p class="text-xs text-[#8B90A8] mb-3">Đăng ký nhận thông báo lịch khai giảng và ưu đãi học phí sớm nhất.</p>
+          <h4 class="font-bold font-heading text-sm mb-4" style="color:#1E293B">Nhận thông tin khóa học miễn phí</h4>
+          <p class="text-xs mb-3" style="color:#64748B">Đăng ký nhận thông báo lịch khai giảng và ưu đãi học phí sớm nhất.</p>
           <form class="flex gap-2" onsubmit="event.preventDefault();this.querySelector('input').value='';this.querySelector('button').textContent='Đã gửi!'">
             <input type="email" placeholder="Email của bạn" required
               class="flex-1 px-3 py-2.5 rounded-lg text-sm border outline-none min-w-0"
-              style="background:#161825;border-color:#252A3D;color:#E8EAF0;font-family:'Inter',sans-serif"
-              onfocus="this.style.borderColor='#DF6B33'"
-              onblur="this.style.borderColor='#252A3D'" />
-            <button type="submit" class="btn-primary px-4 py-2.5 rounded-lg text-sm font-medium flex-shrink-0">
+              style="background:#fff;border-color:#CBD5E1;color:#1E293B;font-family:'Inter',sans-serif"
+              onfocus="this.style.borderColor='#0055FF'"
+              onblur="this.style.borderColor='#CBD5E1'" />
+            <button type="submit" class="btn-primary px-4 py-2.5 rounded-lg text-sm font-medium flex-shrink-0 shadow-sm shadow-orange-200">
               Gửi
             </button>
           </form>
         </div>
       </div>
-      <div class="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3" style="border-color:#1F2333">
-        <p class="text-xs text-[#8B90A8]">© 2026 Bệnh viện Nhi đồng thành phố Cần Thơ — Đào tạo An toàn Người bệnh. Mọi quyền được bảo lưu.</p>
+      <div class="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3" style="border-color:#E2E8F0">
+        <p class="text-xs" style="color:#64748B">© 2026 Bệnh viện Nhi đồng thành phố Cần Thơ — Đào tạo An toàn Người bệnh. Mọi quyền được bảo lưu.</p>
         <div class="flex gap-5">
-          <a href="#" class="text-xs text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Chính sách</a>
-          <a href="#" class="text-xs text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Điều khoản</a>
-          <a href="#" class="text-xs text-[#8B90A8] hover:text-[#DF6B33] transition-colors">Bảo mật</a>
+          <a href="#" class="text-xs transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Chính sách</a>
+          <a href="#" class="text-xs transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Điều khoản</a>
+          <a href="#" class="text-xs transition-colors" style="color:#64748B" onmouseover="this.style.color='#0055FF'" onmouseout="this.style.color='#64748B'">Bảo mật</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Initialize Lucide icons
     lucide.createIcons();
 
-    // Mobile menu
     document.getElementById('mobileMenuBtn').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
@@ -714,32 +716,26 @@
       });
     });
 
-    // Course accordion
     function toggleCourse(btn) {
       var content = btn.nextElementSibling;
       var icon = btn.querySelector('.course-icon');
       var isHidden = content.classList.contains('hidden');
-      // Close all
       document.querySelectorAll('.course-content').forEach(function(c) { c.classList.add('hidden'); });
       document.querySelectorAll('.course-icon').forEach(function(i) { i.style.transform = 'rotate(0deg)'; });
-      // Open current if was closed
       if (isHidden) {
         content.classList.remove('hidden');
         icon.style.transform = 'rotate(180deg)';
       }
     }
 
-    // FAQ accordion
     function toggleFaq(btn) {
       var item = btn.parentElement;
       var body = item.querySelector('.faq-body');
       var icon = item.querySelector('.faq-icon');
       var isHidden = body.classList.contains('hidden');
-      // Close all
       document.querySelectorAll('.faq-body').forEach(function(b) { b.classList.add('hidden'); });
       document.querySelectorAll('.faq-icon').forEach(function(i) { i.setAttribute('data-lucide', 'plus'); i.style.transform = 'rotate(0deg)'; });
       lucide.createIcons();
-      // Open current if was closed
       if (isHidden) {
         body.classList.remove('hidden');
         icon.setAttribute('data-lucide', 'minus');
@@ -748,7 +744,6 @@
       }
     }
 
-    // Register form
     function handleRegister(e) {
       e.preventDefault();
       var btn = document.getElementById('submitBtn');
@@ -761,44 +756,15 @@
         lucide.createIcons();
       }, 1500);
     }
+
+    window.addEventListener('scroll', function() {
+      var nav = document.getElementById('mainNav');
+      if (window.scrollY > 20) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    });
   </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
